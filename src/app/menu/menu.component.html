@@ -1,4 +1,4 @@
-<select>
+<select [(ngModel)]="currentPage" (change)="switch()">
     <ng-container *ngFor="let route of getNavRoutes()">
         <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
     </ng-container>
