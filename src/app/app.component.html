@@ -15,7 +15,11 @@
                 </ul>
             </div> -->
         </mat-toolbar>
-
+        <select [(ngModel)]="page" (change)="changePage(page)">
+            <ng-container *ngFor="let route of getNavRoutes()">
+                <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
+            </ng-container>
+        </select>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
