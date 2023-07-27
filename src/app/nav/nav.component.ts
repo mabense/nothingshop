@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -6,14 +7,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
+  @Input() currentPage: string = '';
+  @Output() selectedPage: EventEmitter<string> = new EventEmitter();
 
+  constructor(
+    private router: Router
+  ) {}
+
+  getNavRoutes() {
+    return this.router.config;
+  }
+
+  switch() {
+    this.selectedPage.emit(this.currentPage);
+  }
 }
 
 
 @Component({
   selector: 'app-nav-sidenav',
   template: `
-  <p>SIDENAV!!!!</p>
+  <span>SIDENAV: </span>
+  <select [(ngModel)]="currentPage" (change)="switch()">
+    <ng-container *ngFor="let route of getNavRoutes()">
+      <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
+    </ng-container>
+  </select>
   `,
   styleUrls: ['./nav.component.scss']
 })

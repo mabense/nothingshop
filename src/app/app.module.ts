@@ -9,7 +9,9 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+
 import { NavComponent, NavSidenavComponent, NavToolbarComponent } from './nav/nav.component';
+import { FormsModule } from '@angular/forms';
 
 // import { MenuComponent } from './menu/menu.component';
 // import { NavModule } from './nav/nav.module';
@@ -20,11 +22,11 @@ import { NavComponent, NavSidenavComponent, NavToolbarComponent } from './nav/na
     NavComponent, 
     NavSidenavComponent, 
     NavToolbarComponent,
-    
+
     AppComponent
   ],
   imports: [
-    // NavModule,
+    FormsModule,
 
     MatSidenavModule,
     MatToolbarModule,
