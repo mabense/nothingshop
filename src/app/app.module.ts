@@ -7,12 +7,22 @@ import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent
   ],
   imports: [
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+
     FormsModule,
     BrowserModule,
     AppRoutingModule,
