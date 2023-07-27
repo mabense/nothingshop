@@ -1,15 +1,7 @@
 <mat-sidenav-container>
-    <mat-sidenav>
-        <app-nav-sidenav (selectedPage)="changePage($event)" [currentPage]="page">
-        </app-nav-sidenav>
-    </mat-sidenav>
+    <app-nav-sidenav (selectedPage)="changePage($event)" [currentPage]="page"></app-nav-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar color="primary">
-            <button mat-icon-button>
-                <mat-icon>menu</mat-icon>
-            </button>
-            <app-nav-toolbar></app-nav-toolbar>
-        </mat-toolbar>
+        <app-nav-toolbar></app-nav-toolbar>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

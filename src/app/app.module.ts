@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 
 import { NavComponent, NavSidenavComponent, NavToolbarComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     FormsModule,
+    FlexLayoutModule,
 
     MatSidenavModule,
     MatToolbarModule,

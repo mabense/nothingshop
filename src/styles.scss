@@ -35,5 +35,32 @@ $nothingshop-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body, mat-sidenav-container, mat-sidenav-content { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body,
+mat-sidenav-container,
+mat-sidenav-content {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: large;
+}
+
+mat-sidenav,
+mat-toolbar {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: x-large;
+}
+
+mat-sidenav {
+  width: 66%;
+}
+
+//
+a, button {
+  text-decoration: none;
+  color: inherit;
+}

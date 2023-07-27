@@ -27,11 +27,13 @@ export class NavComponent {
 @Component({
   selector: 'app-nav-sidenav',
   template: `
-  <select [(ngModel)]="currentPage" (change)="switch()">
-    <ng-container *ngFor="let route of getNavRoutes()">
-      <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
-    </ng-container>
-  </select>
+  <mat-sidenav>
+    <select [(ngModel)]="currentPage" (change)="switch()">
+      <ng-container *ngFor="let route of getNavRoutes()">
+        <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
+      </ng-container>
+    </select>
+  </mat-sidenav>
   `,
   styleUrls: ['./nav.component.scss']
 })
@@ -43,14 +45,19 @@ export class NavSidenavComponent extends NavComponent {
 @Component({
   selector: 'app-nav-toolbar',
   template: `
-  <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
+  <mat-toolbar color="primary">
+    <button mat-icon-button fxHide.gt-xs>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
       <ng-container *ngFor="let route of getNavRoutes()">
-          <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
-              <div fxLayoutAlign="center center">{{route.path}}</div>
-          </a>
+        <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
+          <div fxLayoutAlign="center center">{{route.path}}</div>
+        </a>
       </ng-container>
-  </div>
-  <div fxFlex fxLayoutAlign="flex-end center">Demo Shop</div>
+    </div>
+    <div fxFlex fxLayoutAlign="flex-end center">Demo Shop</div>
+  </mat-toolbar>
   `,
   styleUrls: ['./nav.component.scss']
 })
