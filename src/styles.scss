@@ -3,35 +3,14 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$nothingshop-primary: mat.define-palette(mat.$indigo-palette);
-$nothingshop-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$nothingshop-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$nothingshop-theme: mat.define-light-theme((
-  color: (
-    primary: $nothingshop-primary,
-    accent: $nothingshop-accent,
-    warn: $nothingshop-warn,
-  )
-));
+@use './mixins.scss' as mixins;
+@use './theme.scss' as custom;
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($nothingshop-theme);
+@include mixins.primary-toolbar-theme(custom.$theme);
+
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -59,8 +38,39 @@ mat-sidenav {
   width: 66%;
 }
 
-//
-a, button {
-  text-decoration: none;
-  color: inherit;
+.page-body {
+  width: 90vw;
+  height: fit-content;
+  box-sizing: border-box;
+
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-page>* {
+  width: 100%;
+}
+
+.one-line-page {
+  height: 67vh;
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  text-align: center;
+
+  box-sizing: border-box;
 }

@@ -45,7 +45,7 @@ export class NavSidenavComponent extends NavComponent {
 @Component({
   selector: 'app-nav-toolbar',
   template: `
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="primary-toolbar">
     <button mat-icon-button fxHide.gt-xs>
       <mat-icon>menu</mat-icon>
     </button>
