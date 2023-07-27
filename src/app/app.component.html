@@ -7,6 +7,7 @@
             <button mat-icon-button>
                 <mat-icon>menu</mat-icon>
             </button>
+            <app-nav-toolbar></app-nav-toolbar>
             <!-- <div>
                 <ul>
                     <ng-container *ngFor="let ">
@@ -15,11 +16,7 @@
                 </ul>
             </div> -->
         </mat-toolbar>
-        <select [(ngModel)]="page" (change)="changePage(page)">
-            <ng-container *ngFor="let route of getNavRoutes()">
-                <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
-            </ng-container>
-        </select>
+        <app-nav-sidenav></app-nav-sidenav>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

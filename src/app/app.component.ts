@@ -24,8 +24,4 @@ export class AppComponent implements OnInit {
   changePage(selectedPage: string) {
     this.router.navigateByUrl(selectedPage);
   }
-
-  getNavRoutes() {
-    return this.router.config;
-  }
 }
