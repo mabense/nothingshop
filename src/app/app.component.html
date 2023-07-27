@@ -1,6 +1,7 @@
 <mat-sidenav-container>
     <mat-sidenav>
-        <!-- <app-menu (selectedPage)="changePage($event)" [currentPage]="page"></app-menu> -->
+        <app-nav-sidenav (selectedPage)="changePage($event)" [currentPage]="page">
+        </app-nav-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color="primary">
@@ -8,15 +9,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <app-nav-toolbar></app-nav-toolbar>
-            <!-- <div>
-                <ul>
-                    <ng-container *ngFor="let ">
-                        <li></li>
-                    </ng-container>
-                </ul>
-            </div> -->
         </mat-toolbar>
-        <app-nav-sidenav (selectedPage)="changePage($event)" [currentPage]="page"></app-nav-sidenav>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

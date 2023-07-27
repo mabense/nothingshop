@@ -13,9 +13,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { NavComponent, NavSidenavComponent, NavToolbarComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 
-// import { MenuComponent } from './menu/menu.component';
-// import { NavModule } from './nav/nav.module';
-
 @NgModule({
   declarations: [
     // MenuComponent,

@@ -27,7 +27,6 @@ export class NavComponent {
 @Component({
   selector: 'app-nav-sidenav',
   template: `
-  <span>SIDENAV: </span>
   <select [(ngModel)]="currentPage" (change)="switch()">
     <ng-container *ngFor="let route of getNavRoutes()">
       <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
@@ -44,7 +43,14 @@ export class NavSidenavComponent extends NavComponent {
 @Component({
   selector: 'app-nav-toolbar',
   template: `
-  <p>TOOLBAR!!!!</p>
+  <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
+      <ng-container *ngFor="let route of getNavRoutes()">
+          <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
+              <div fxLayoutAlign="center center">{{route.path}}</div>
+          </a>
+      </ng-container>
+  </div>
+  <div fxFlex fxLayoutAlign="flex-end center">Demo Shop</div>
   `,
   styleUrls: ['./nav.component.scss']
 })
