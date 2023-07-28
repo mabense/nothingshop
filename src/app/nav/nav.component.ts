@@ -27,18 +27,19 @@ export class NavComponent {
 @Component({
   selector: 'app-nav-sidenav',
   template: `
-  <mat-sidenav>
-    <select [(ngModel)]="currentPage" (change)="switch()">
+  <mat-sidenav #sidenav>
+    <mat-nav-list (click)="sidenav.close()">
       <ng-container *ngFor="let route of getNavRoutes()">
-        <option *ngIf="route.path !== '' && route.path !== '**'" [value]="route.path">{{route.path}}</option>
+        <a mat-list-item routerLink="'/' + route.path">
+          <span class="nav-text">{{route.path}}</span>
+        </a>
       </ng-container>
-    </select>
+    </mat-nav-list>
   </mat-sidenav>
   `,
   styleUrls: ['./nav.component.scss']
 })
 export class NavSidenavComponent extends NavComponent {
-
 }
 
 
@@ -46,13 +47,15 @@ export class NavSidenavComponent extends NavComponent {
   selector: 'app-nav-toolbar',
   template: `
   <mat-toolbar color="primary" class="primary-toolbar">
-    <button mat-icon-button fxHide.gt-xs>
+    <button mat-icon-button fxHide.gt-xs (click)="openSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
     <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
       <ng-container *ngFor="let route of getNavRoutes()">
         <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
-          <div fxLayoutAlign="center center">{{route.path}}</div>
+          <div fxLayoutAlign="center center">
+            <span class="nav-text">{{route.path}}</span>
+          </div>
         </a>
       </ng-container>
     </div>
@@ -62,5 +65,9 @@ export class NavSidenavComponent extends NavComponent {
   styleUrls: ['./nav.component.scss']
 })
 export class NavToolbarComponent extends NavComponent {
+  @Output() onOpenSidenav: EventEmitter<boolean> = new EventEmitter();
 
+  openSidenav() {
+    this.onOpenSidenav.emit(true);
+  }
 }
