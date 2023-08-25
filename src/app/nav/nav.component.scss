@@ -1,4 +1,3 @@
-
 :not(mat-icon) {
   font-family: Impact, Haettenschweiler, 'Arial Bold', sans-serif;
   font-size: x-large;
@@ -8,9 +7,14 @@
 // mat-toolbar 
 
 mat-sidenav {
-    width: 66%;
-  }
-  
-  .nav-text {
-    text-transform: capitalize;
-  }
+  width: 66%;
+}
+
+.nav-text {
+  text-transform: capitalize;
+}
+
+.nav-current {
+  color: red;
+  border-color: red;
+}

@@ -12,7 +12,7 @@ export class NavComponent {
 
   constructor(
     private router: Router
-  ) {}
+  ) { }
 
   getNavRoutes() {
     return this.router.config;
@@ -52,11 +52,20 @@ export class NavSidenavComponent extends NavComponent {
     </button>
     <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
       <ng-container *ngFor="let route of getNavRoutes()">
-        <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
-          <div fxLayoutAlign="center center">
-            <span class="nav-text">{{route.path}}</span>
-          </div>
-        </a>
+        <ng-container *ngIf="route.path !== currentPage">
+          <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
+            <div fxLayoutAlign="center center">
+              <span class="nav-text">{{route.path}}</span>
+            </div>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="route.path === currentPage">
+          <a class="primary-toolbar-current">
+            <div fxLayoutAlign="center center">
+              <span class="nav-text">{{route.path}}</span>
+            </div>
+          </a>
+        </ng-container>
       </ng-container>
     </div>
     <div fxFlex fxLayoutAlign="flex-end center">Demo Shop</div>

@@ -17,7 +17,7 @@
         box-sizing: content-box;
     }
 
-    .primary-toolbar div, 
+    .primary-toolbar div,
     .primary-toolbar a {
         height: 100%;
         width: 100%;
@@ -52,6 +52,16 @@
         background-color: rgba(mat.get-color-from-palette($accent-palette, darker), 1);
         border-color: mat.get-color-from-palette($accent-palette, darker);
         color: mat.get-color-from-palette($accent-palette, lighter);
+    }
+
+    // Current page
+
+    .primary-toolbar-current,
+    .primary-toolbar-current:hover,
+    .primary-toolbar-current:active {
+        background-color: transparent !important;
+        border-color: mat.get-color-from-palette($accent-palette, lighter) !important;
+        color: mat.get-color-from-palette($accent-palette, lighter) !important;
     }
 }
 
