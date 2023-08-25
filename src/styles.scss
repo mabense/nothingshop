@@ -9,6 +9,8 @@
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
+// @include mat.core();
+// @include mat.all-component-themes(custom.$theme);
 @include mixins.primary-toolbar-theme(custom.$theme);
 
 
@@ -24,28 +26,17 @@ mat-sidenav-content {
 body {
   margin: 0;
   padding: 0;
-  font-family: Roboto, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Roboto, 'Arial Narrow', sans-serif;
   font-size: large;
-}
-
-mat-sidenav,
-mat-toolbar {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: x-large;
-}
-
-mat-sidenav {
-  width: 66%;
-}
-
-.nav-text {
-  text-transform: capitalize;
 }
 
 .page-body {
   width: 90vw;
   height: fit-content;
   box-sizing: border-box;
+
+  // font-family: Roboto, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  // font-size: large;
 
   margin-top: 1em;
   margin-left: auto;

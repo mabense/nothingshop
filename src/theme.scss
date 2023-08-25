@@ -144,7 +144,7 @@ $mat-dark-theme-background: (
 );
 
 // Compute font config
-@include mat.core();
+// @include mat.font-family($fontConfig);
 
 // Theme Config
 

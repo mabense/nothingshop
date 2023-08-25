@@ -1,0 +1,16 @@
+
+:not(mat-icon) {
+  font-family: Impact, Haettenschweiler, 'Arial Bold', sans-serif;
+  font-size: x-large;
+}
+
+// mat-sidenav,
+// mat-toolbar 
+
+mat-sidenav {
+    width: 66%;
+  }
+  
+  .nav-text {
+    text-transform: capitalize;
+  }
