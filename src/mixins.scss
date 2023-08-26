@@ -56,12 +56,12 @@
 
     // Current page
 
-    .primary-toolbar-current,
-    .primary-toolbar-current:hover,
-    .primary-toolbar-current:active {
-        background-color: transparent !important;
-        border-color: mat.get-color-from-palette($accent-palette, lighter) !important;
-        color: mat.get-color-from-palette($accent-palette, lighter) !important;
+    #primary-toolbar-current,
+    #primary-toolbar-current:hover,
+    #primary-toolbar-current:active {
+        background-color: transparent;
+        border-color: mat.get-color-from-palette($accent-palette, lighter);
+        color: mat.get-color-from-palette($accent-palette, lighter);
     }
 }
 

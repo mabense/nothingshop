@@ -60,7 +60,7 @@ export class NavSidenavComponent extends NavComponent {
           </a>
         </ng-container>
         <ng-container *ngIf="route.path === currentPage">
-          <a class="primary-toolbar-current">
+          <a id="primary-toolbar-current">
             <div fxLayoutAlign="center center">
               <span class="nav-text">{{route.path}}</span>
             </div>
