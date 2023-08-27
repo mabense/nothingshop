@@ -10,6 +10,18 @@ mat-sidenav {
   width: 66%;
 }
 
+// Disable ripple overlay
+
+.primary-toolbar button ::ng-deep .mat-button-focus-overlay {
+    display: none;
+}
+
+.primary-toolbar button ::ng-deep .mat-mdc-button-persistent-ripple {
+    display: none;
+}
+
+// Classes
+
 .nav-text {
   text-transform: capitalize;
 }

@@ -47,7 +47,7 @@ export class NavSidenavComponent extends NavComponent {
   selector: 'app-nav-toolbar',
   template: `
   <mat-toolbar color="primary" class="primary-toolbar">
-    <button mat-icon-button fxHide.gt-xs (click)="openSidenav()">
+    <button  mat-icon-button (click)="openSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
     <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
