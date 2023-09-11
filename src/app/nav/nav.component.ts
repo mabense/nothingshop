@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
+import { NavService } from '../services/nav.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class NavComponent {
   @Input() currentPage: string = '';
-  @Output() selectedPage: EventEmitter<string> = new EventEmitter();
+  @Output() pageSelected: EventEmitter<string> = new EventEmitter();
 
   constructor(
-    private router: Router
+    protected router: Router,
+    protected navService: NavService
   ) { }
 
   getNavRoutes() {
@@ -19,7 +22,7 @@ export class NavComponent {
   }
 
   switch() {
-    this.selectedPage.emit(this.currentPage);
+    this.pageSelected.emit(this.currentPage);
   }
 }
 
@@ -27,19 +30,30 @@ export class NavComponent {
 @Component({
   selector: 'app-nav-sidenav',
   template: `
-  <mat-sidenav #sidenav>
-    <mat-nav-list (click)="sidenav.close()">
-      <ng-container *ngFor="let route of getNavRoutes()">
-        <a mat-list-item routerLink="'/' + route.path">
-          <span class="nav-text">{{route.path}}</span>
-        </a>
-      </ng-container>
-    </mat-nav-list>
-  </mat-sidenav>
+      <mat-nav-list (click)="closeSidenav()"> <!--  -->
+        <ng-container *ngFor="let route of getNavRoutes()">
+          <ng-container *ngIf="route.path !== '' && route.path !== '**'">
+            <ng-container *ngIf="route.path !== currentPage">
+              <a mat-list-item [routerLink]="'/' +  route.path">
+                <span class="nav-text">{{route.path}}</span>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="route.path === currentPage">
+              <a mat-list-item>
+                <span class="nav-text">{{route.path}}</span>
+              </a>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </mat-nav-list>
   `,
   styleUrls: ['./nav.component.scss']
 })
 export class NavSidenavComponent extends NavComponent {
+  
+  closeSidenav() {
+    this.navService.sidenavClose();
+  }
 }
 
 
@@ -47,7 +61,7 @@ export class NavSidenavComponent extends NavComponent {
   selector: 'app-nav-toolbar',
   template: `
   <mat-toolbar color="primary" class="primary-toolbar">
-    <button  mat-icon-button (click)="openSidenav()">
+    <button  mat-icon-button fxHide.gt-xs (click)="openSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
     <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
@@ -74,9 +88,8 @@ export class NavSidenavComponent extends NavComponent {
   styleUrls: ['./nav.component.scss']
 })
 export class NavToolbarComponent extends NavComponent {
-  @Output() onOpenSidenav: EventEmitter<boolean> = new EventEmitter();
 
   openSidenav() {
-    this.onOpenSidenav.emit(true);
+    this.navService.sidenavOpen();
   }
 }

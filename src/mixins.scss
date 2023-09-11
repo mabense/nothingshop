@@ -63,6 +63,10 @@
         border-color: mat.get-color-from-palette($accent-palette, lighter);
         color: mat.get-color-from-palette($accent-palette, lighter);
     }
+
+    mat-sidenav {
+      width: 66%;
+    }
 }
 
 @mixin primary-toolbar-typography($theme) {
