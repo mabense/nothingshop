@@ -1,0 +1,24 @@
+<mat-toolbar color="primary" class="primary-toolbar">
+    <button mat-icon-button fxHide.gt-xs (click)="openSidenav()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
+        <ng-container *ngFor="let route of getNavRoutes()">
+            <ng-container *ngIf="route.path !== currentPage">
+                <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
+                    <div fxLayoutAlign="center center">
+                        <span class="nav-text">{{route.path}}</span>
+                    </div>
+                </a>
+            </ng-container>
+            <ng-container *ngIf="route.path === currentPage">
+                <a id="primary-toolbar-current">
+                    <div fxLayoutAlign="center center">
+                        <span class="nav-text">{{route.path}}</span>
+                    </div>
+                </a>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div fxFlex fxLayoutAlign="flex-end center">Demo Shop</div>
+</mat-toolbar>

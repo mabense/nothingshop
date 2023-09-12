@@ -1,0 +1,16 @@
+<mat-nav-list (click)="closeSidenav()">
+    <ng-container *ngFor="let route of getNavRoutes()">
+        <ng-container *ngIf="route.path !== '' && route.path !== '**'">
+            <ng-container *ngIf="route.path !== currentPage">
+                <a mat-list-item [routerLink]="'/' +  route.path">
+                    <span class="nav-text">{{route.path}}</span>
+                </a>
+            </ng-container>
+            <ng-container *ngIf="route.path === currentPage">
+                <a mat-list-item>
+                    <span class="nav-text">{{route.path}}</span>
+                </a>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</mat-nav-list>

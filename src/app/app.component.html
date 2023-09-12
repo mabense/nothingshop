@@ -1,9 +1,9 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav>
-        <app-nav-sidenav (pageSelected)="changePage($event)" [currentPage]="page"></app-nav-sidenav>
+        <app-nav-sidenav></app-nav-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-nav-toolbar (pageSelected)="changePage($event)" [currentPage]="page"></app-nav-toolbar>
+        <app-nav-toolbar></app-nav-toolbar>
         <div class="page-body">
             <router-outlet></router-outlet>
         </div>

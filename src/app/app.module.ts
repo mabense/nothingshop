@@ -17,7 +17,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
-    // MenuComponent,
     NavComponent, 
     NavSidenavComponent, 
     NavToolbarComponent,
