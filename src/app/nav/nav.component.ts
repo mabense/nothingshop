@@ -13,12 +13,13 @@ export class NavComponent implements OnInit {
   protected navLinks: Map<string, [string, Route?]> = new Map([
     // ["", ["home"]],
     // ["**", ["not found"]],
+    ["logout", ["Logout"]],
     ["login", ["Login"]],
     ["signup", ["Sign up"]],
     ["edit", ["Edit"]],
     ["list", ["List"]],
     ["product", ["Product"]]
-  ]);
+  ]); // TODO: turn into model class file (?) 
 
   constructor(
     protected router: Router,
@@ -50,10 +51,18 @@ export class NavComponent implements OnInit {
       if (link[1]) {
         navRoutes.push(link[1]);
       }
+      else switch (link[0]) {
+        case "logout":
+          
+          break;
+      
+        default:
+          break;
+      }
     });
 
     return navRoutes;
-  }
+  } // TODO: turn into model class file (?) 
 
   displayNavRouteText(route: Route): string {
     let displayText: string = "";
@@ -62,7 +71,7 @@ export class NavComponent implements OnInit {
     displayText = routeTitle.replace(this.titleSuffix, "");
 
     return displayText;
-  }
+  } // TODO: turn into model class file (?) 
 
   switch() {
     this.navService.pageSelect(this.currentPage);
