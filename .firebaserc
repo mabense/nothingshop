@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nothingshop": {
+      "hosting": {
+        "nothingshop": [
+          "nothingshop"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nothingshop"
+  }
+}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SignupRoutingModule } from './signup-routing.module';
 import { SignupComponent } from './signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -15,6 +16,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     SignupComponent
   ],
   imports: [
+    ReactiveFormsModule, 
+    
     MatFormFieldModule, 
     MatInputModule, 
     MatButtonModule, 

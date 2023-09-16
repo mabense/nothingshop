@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { config, timeout } from 'rxjs';
 import { AsynchronyService } from 'src/app/services/asynchrony.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,25 +18,17 @@ export class LoginComponent {
   });
 
   constructor(
-    private router: Router,
-    protected asyncServ: AsynchronyService
+    protected asyncServ: AsynchronyService, 
+    private auth: AuthService
   ) { }
 
   async login() {
     this.asyncServ.loadDuring((async (): Promise<any> => {
-      let wait: Promise<any> = this.asyncServ.waitSeconds(2);
-      await wait;
-
-      let nameOk: boolean = this.loginForm.get("username")?.value === "a";
-      let passOk: boolean = this.loginForm.get("password")?.value === "a";
-      if (nameOk && passOk) {
-        this.router.navigateByUrl("/list");
-      }
-      else {
-        console.error("Wrong name or password!");
-      }
-
-      return wait;
-    })());
+      return this.auth.login(
+        (this.loginForm.get('username')?.value as string) + 'a@a.aa', 
+        (this.loginForm.get('password')?.value as string) + 'asdasd');
+    })()).then(cred => {
+      console.log(cred);
+    });
   }
 }

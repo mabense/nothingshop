@@ -3,16 +3,22 @@
 </span>
 <div class="flex-column">
     <h1>Sign up!</h1>
-    <mat-form-field>
-        <mat-label for="name">Username:</mat-label>
-        <input matInput type="text" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label for="pwd">Password:</mat-label>
-        <input matInput type="password" />
-    </mat-form-field>
-    <span class="flex-row flex-direction-row-reverse">
-        <button mat-raised-button color="primary" (click)="signup()">Sign up</button>
-        <button mat-raised-button [routerLink]="'/login'">Back to login</button>
-    </span>
+    <form [formGroup]="signUpForm" (ngSubmit)="signup()" class="flex-column">
+        <mat-form-field>
+            <mat-label for="name">Username:</mat-label>
+            <input name="name" matInput type="text" formControlName="username" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="pwd">Password:</mat-label>
+            <input name="pwd" matInput type="password" formControlName="password" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="rePwd">Password again:</mat-label>
+            <input name="rePwd" matInput type="password" formControlName="repass" />
+        </mat-form-field>
+        <span class="flex-row flex-direction-row-reverse">
+            <button mat-raised-button color="primary" type="submit">Sign up</button>
+            <button mat-raised-button [routerLink]="'/login'">Back to login</button>
+        </span>
+    </form>
 </div>

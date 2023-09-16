@@ -6,16 +6,16 @@ import { Injectable } from '@angular/core';
 export class AsynchronyService {
   private loading: number = 0;
 
-  public async loadDuring(prom: Promise<any>) {
+  public async loadDuring(prom: Promise<any>): Promise<any> {
     this.startLoading();
-    await prom;
-    this.doneLoading();
-    //   
-    // } catch (error) {
-    //   console.error(error);
-    //   this.doneLoading();
-    // }
-    // this.doneLoading();
+    try {
+      await prom;
+      this.doneLoading();
+    } catch (error) {
+      console.error(error);
+      this.doneLoading();
+    }
+    return prom;
   }
 
   public waitSeconds(seconds: number): Promise<number> {
