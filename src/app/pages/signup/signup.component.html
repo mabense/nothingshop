@@ -1,4 +1,8 @@
+<span class="loading-indicator" *ngIf="asyncServ.isLoading()">
+    <mat-spinner></mat-spinner>
+</span>
 <div class="flex-column">
+    <h1>Sign up!</h1>
     <mat-form-field>
         <mat-label for="name">Username:</mat-label>
         <input matInput type="text" />
@@ -7,8 +11,8 @@
         <mat-label for="pwd">Password:</mat-label>
         <input matInput type="password" />
     </mat-form-field>
-    <span class="flex-row">
-        <button mat-raised-button [routerLink]="'/login'">Back to login</button>
+    <span class="flex-row flex-direction-row-reverse">
         <button mat-raised-button color="primary" (click)="signup()">Sign up</button>
+        <button mat-raised-button [routerLink]="'/login'">Back to login</button>
     </span>
 </div>

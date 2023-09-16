@@ -7,6 +7,7 @@ import { SignupComponent } from './signup.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatFormFieldModule, 
     MatInputModule, 
     MatButtonModule, 
+    MatProgressSpinnerModule, 
 
     CommonModule,
     SignupRoutingModule

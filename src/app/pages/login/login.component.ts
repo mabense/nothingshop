@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { config, timeout } from 'rxjs';
+import { AsynchronyService } from 'src/app/services/asynchrony.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +10,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginForm =  new FormGroup({
-  username: new FormControl(""), 
-  password: new FormControl("")
+
+  loginForm = new FormGroup({
+    username: new FormControl(""),
+    password: new FormControl("")
   });
 
   constructor(
-    private router: Router
-  ){ }
+    private router: Router, 
+    protected asyncServ: AsynchronyService
+  ) { }
 
-  login() {
+  async login() {
+    this.asyncServ.startLoading();
+    /* * /
+    /*/
+    await this.loadPromise();
+    console.log("Done waiting.");
     /* */
     let nameOk: boolean = this.loginForm.get("username")?.value === "a";
     let passOk: boolean = this.loginForm.get("password")?.value === "a";
@@ -27,16 +36,23 @@ export class LoginComponent {
     else {
       console.error("Wrong name or password!");
     }
-    
-    /*/
-    let nameOk: boolean = this.username.value === "a";
-    let passOk: boolean = this.password.value === "a";
-    if (nameOk && passOk) {
-      this.router.navigateByUrl("/edit");
-    }
-    else {
-      console.error("Wrong name or password!");
-    }
-    /* */
+
+
+    this.asyncServ.doneLoading();
+  }
+
+  loadPromise(): Promise<number> {
+    // TODO: remove this dummy function
+    return new Promise((resolve, reject) => {
+      let i = 0;
+      const interval = setInterval(() => {
+        i++;
+        console.log("waited for: " + i + " seconds");
+        if (i === 3) {
+          clearInterval(interval);
+          resolve(i);
+        }
+      }, 1000);
+    })
   }
 }

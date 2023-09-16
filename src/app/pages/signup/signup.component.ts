@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AsynchronyService } from 'src/app/services/asynchrony.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +8,13 @@ import { Component } from '@angular/core';
 })
 export class SignupComponent {
 
+  constructor(
+    protected asyncServ: AsynchronyService
+  ) {}
+
   signup() {
-    
+    this.asyncServ.startLoading();
+
+    this.asyncServ.doneLoading();
   }
 }
