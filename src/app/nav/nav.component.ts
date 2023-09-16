@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ROUTES, Route, Router } from '@angular/router';
 import { NavService } from '../services/nav.service';
 
 @Component({
@@ -8,7 +8,17 @@ import { NavService } from '../services/nav.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  protected titleSuffix = " - NothingShop";
   protected currentPage: string = "";
+  protected navLinks: Map<string, [string, Route?]> = new Map([
+    // ["", ["home"]],
+    // ["**", ["not found"]],
+    ["login", ["Login"]],
+    ["signup", ["Sign up"]],
+    ["edit", ["Edit"]],
+    ["list", ["List"]],
+    ["product", ["Product"]]
+  ]);
 
   constructor(
     protected router: Router,
@@ -22,7 +32,36 @@ export class NavComponent implements OnInit {
   }
 
   getNavRoutes() {
-    return this.router.config;
+    let navRoutes: Array<Route> = new Array();
+
+    // Gether Routes
+    this.router.config.forEach(route => {
+      if (route.path || route.path === "") {
+        let link = this.navLinks.get(route.path);
+        if (link) {
+          route.title = link[0] + this.titleSuffix;
+          link[1] = route;
+        }
+      }
+    });
+
+    // Sort Routes
+    this.navLinks.forEach(link => {
+      if (link[1]) {
+        navRoutes.push(link[1]);
+      }
+    });
+
+    return navRoutes;
+  }
+
+  displayNavRouteText(route: Route): string {
+    let displayText: string = "";
+
+    let routeTitle = route.title as string;
+    displayText = routeTitle.replace(this.titleSuffix, "");
+
+    return displayText;
   }
 
   switch() {

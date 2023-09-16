@@ -25,33 +25,37 @@
     }
 
     .primary-toolbar a {
+        margin: 0;
         border-top: 5px solid transparent;
         border-bottom: 5px solid transparent;
+        padding-left: .5em;
+        padding-right: .5em;
     }
 
     //  Link animations
 
     .primary-toolbar a:link,
     .primary-toolbar button:link {
-        margin: 0;
-        padding: 0;
         text-decoration: none;
         color: mat.get-color-from-palette($primary-palette, default-contrast);
     }
 
     .primary-toolbar a:hover,
     .primary-toolbar button:hover {
-        background-color: rgba(mat.get-color-from-palette($accent-palette, default-contrast), 0.3);
-        border-color: mat.get-color-from-palette($accent-palette, darker);
-        color: mat.get-color-from-palette($accent-palette, darker);
+        padding-top: .25em;
+        padding-bottom: .25em;
+        background-color: transparent;
+        //background-color: rgba(mat.get-color-from-palette($primary-palette, default-contrast), 0.3);
+        border-color: mat.get-color-from-palette($accent-palette, lighter);
+        color: mat.get-color-from-palette($accent-palette, lighter);
     }
 
 
     .primary-toolbar a:active,
     .primary-toolbar button:active {
-        background-color: rgba(mat.get-color-from-palette($accent-palette, darker), 1);
-        border-color: mat.get-color-from-palette($accent-palette, darker);
-        color: mat.get-color-from-palette($accent-palette, lighter);
+        background-color: rgba(mat.get-color-from-palette($primary-palette, lighter), 1);
+        border-color: mat.get-color-from-palette($primary-palette, lighter);
+        color: mat.get-color-from-palette($primary-palette, darker-contrast);
     }
 
     // Current page
@@ -59,9 +63,11 @@
     #primary-toolbar-current,
     #primary-toolbar-current:hover,
     #primary-toolbar-current:active {
+        padding-top: 0;
+        padding-bottom: 0;
         background-color: transparent;
-        border-color: mat.get-color-from-palette($accent-palette, lighter);
-        color: mat.get-color-from-palette($accent-palette, lighter);
+        border-color: mat.get-color-from-palette($primary-palette, lighter);
+        color: mat.get-color-from-palette($primary-palette, lighter);
     }
 
     mat-sidenav {

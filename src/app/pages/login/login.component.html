@@ -1,14 +1,16 @@
 <div class="flex-column">
-    <span>
-        <label for="name">Username:</label>
-        <input type="text" />
-    </span>
-    <span>
-        <label for="pwd">Password:</label>
-        <input type="password" />
-    </span>
-    <span>
-        <button (click)="login()">Log in</button>
-        <button [routerLink]="'/signup'">Sign up</button>
-    </span>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex-column">
+        <span>
+            <label for="name">Username:</label>
+            <input name="name" type="text" formControlName="username" />
+        </span>
+        <span>
+            <label for="pwd">Password:</label>
+            <input name="pwd" type="password" formControlName="password" />
+        </span>
+        <span>
+            <button type="submit">Log in</button>
+            <button [routerLink]="'/signup'">Sign up</button>
+        </span>
+    </form>
 </div>

@@ -5,16 +5,17 @@
     <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
         <ng-container *ngFor="let route of getNavRoutes()">
             <ng-container *ngIf="route.path !== currentPage">
-                <a *ngIf="route.path !== '' && route.path !== '**'" [routerLink]="'/' +  route.path">
+                <a [routerLink]="'/' +  route.path">
+                    <!--  *ngIf="route.path !== '' && route.path !== '**'" -->
                     <div fxLayoutAlign="center center">
-                        <span class="nav-text">{{route.path}}</span>
+                        <span class="nav-text">{{displayNavRouteText(route)}}</span>
                     </div>
                 </a>
             </ng-container>
             <ng-container *ngIf="route.path === currentPage">
                 <a id="primary-toolbar-current">
                     <div fxLayoutAlign="center center">
-                        <span class="nav-text">{{route.path}}</span>
+                        <span class="nav-text">{{displayNavRouteText(route)}}</span>
                     </div>
                 </a>
             </ng-container>

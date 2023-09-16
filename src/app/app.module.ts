@@ -14,6 +14,7 @@ import { MatListModule } from "@angular/material/list";
 import { NavComponent, NavSidenavComponent, NavToolbarComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgArrayPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   imports: [
     FormsModule,
     FlexLayoutModule,
+    NgArrayPipesModule, 
 
     MatSidenavModule,
     MatToolbarModule,
