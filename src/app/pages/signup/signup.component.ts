@@ -13,8 +13,6 @@ export class SignupComponent {
   ) {}
 
   signup() {
-    this.asyncServ.startLoading();
-
-    this.asyncServ.doneLoading();
+    this.asyncServ.loadDuring(this.asyncServ.waitSeconds(2));
   }
 }

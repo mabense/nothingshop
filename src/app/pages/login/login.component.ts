@@ -22,12 +22,10 @@ export class LoginComponent {
   ) { }
 
   async login() {
-    this.asyncServ.startLoading();
     /* * /
-    /*/
+    this.asyncServ.startLoading();
     await this.loadPromise();
     console.log("Done waiting.");
-    /* */
     let nameOk: boolean = this.loginForm.get("username")?.value === "a";
     let passOk: boolean = this.loginForm.get("password")?.value === "a";
     if (nameOk && passOk) {
@@ -36,23 +34,9 @@ export class LoginComponent {
     else {
       console.error("Wrong name or password!");
     }
-
-
     this.asyncServ.doneLoading();
-  }
-
-  loadPromise(): Promise<number> {
-    // TODO: remove this dummy function
-    return new Promise((resolve, reject) => {
-      let i = 0;
-      const interval = setInterval(() => {
-        i++;
-        console.log("waited for: " + i + " seconds");
-        if (i === 3) {
-          clearInterval(interval);
-          resolve(i);
-        }
-      }, 1000);
-    })
+    /*/
+    this.asyncServ.loadDuring(this.asyncServ.waitSeconds(2));
+    /* */
   }
 }
