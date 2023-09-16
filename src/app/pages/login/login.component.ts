@@ -17,26 +17,25 @@ export class LoginComponent {
   });
 
   constructor(
-    private router: Router, 
+    private router: Router,
     protected asyncServ: AsynchronyService
   ) { }
 
   async login() {
-    /* * /
-    this.asyncServ.startLoading();
-    await this.loadPromise();
-    console.log("Done waiting.");
-    let nameOk: boolean = this.loginForm.get("username")?.value === "a";
-    let passOk: boolean = this.loginForm.get("password")?.value === "a";
-    if (nameOk && passOk) {
-      this.router.navigateByUrl("/list");
-    }
-    else {
-      console.error("Wrong name or password!");
-    }
-    this.asyncServ.doneLoading();
-    /*/
-    this.asyncServ.loadDuring(this.asyncServ.waitSeconds(2));
-    /* */
+    this.asyncServ.loadDuring((async (): Promise<any> => {
+      let wait: Promise<any> = this.asyncServ.waitSeconds(2);
+      await wait;
+
+      let nameOk: boolean = this.loginForm.get("username")?.value === "a";
+      let passOk: boolean = this.loginForm.get("password")?.value === "a";
+      if (nameOk && passOk) {
+        this.router.navigateByUrl("/list");
+      }
+      else {
+        console.error("Wrong name or password!");
+      }
+
+      return wait;
+    })());
   }
 }
