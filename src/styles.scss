@@ -73,3 +73,8 @@ mat-sidenav {
 
   box-sizing: border-box;
 }
+
+.flex-row > * {
+  width: 100%;
+  margin: 0 .25em 0;
+}
