@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTES, Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavService } from '../services/nav.service';
 import { NavLink } from '../models/NavLink';
 import { AuthService } from '../services/auth.service';
@@ -18,17 +18,20 @@ export class NavComponent implements OnInit {
   private loggedInSubscription?: Subscription;
 
   protected guestNavLinks: Array<NavLink> = [
-    { name: 'login', display: 'Login' },
-    { name: 'signup', display: 'Sign up' },
-    { name: 'edit', display: 'Edit' },
-    { name: 'list', display: 'List' },
-    { name: 'product', display: 'Product' }
+    {name: 'login', display: 'Login'},
+    {name: 'signup', display: 'Sign up'},
+    {name: 'edit', display: 'Edit'},
+    {name: 'list', display: 'List'},
+    {name: 'product', display: 'Product'}
   ];
   protected userNavLinks: Array<NavLink> = [
-    { name: 'logout', display: 'Logout', onClick: () => {this.auth.logout()} },
-    { name: 'edit', display: 'Edit' },
-    { name: 'list', display: 'List' },
-    { name: 'product', display: 'Product' }
+    {name: 'logout', display: 'Logout', onClick: async () => {
+      await this.auth.logout();
+      this.navService.pageSelect('/login');
+    }},
+    {name: 'edit', display: 'Edit'},
+    {name: 'list', display: 'List'},
+    {name: 'product', display: 'Product'}
   ];
 
   constructor(
