@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavService } from './services/nav.service';
-import { AuthService } from './services/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
