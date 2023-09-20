@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTES, Route, Router } from '@angular/router';
 import { NavService } from '../services/nav.service';
+import { NavLink } from '../models/NavLink';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -10,18 +13,26 @@ import { NavService } from '../services/nav.service';
 export class NavComponent implements OnInit {
   protected titleSuffix = " - NothingShop";
   protected currentPage: string = "";
-  protected navLinks: Map<string, [string, Route?]> = new Map([
-    // ["", ["home"]],
-    // ["**", ["not found"]],
-    ["logout", ["Logout"]],
-    ["login", ["Login"]],
-    ["signup", ["Sign up"]],
-    ["edit", ["Edit"]],
-    ["list", ["List"]],
-    ["product", ["Product"]]
-  ]); // TODO: turn into model class file (?) 
+
+  private loggedInUser?: firebase.default.User | null;
+  private loggedInSubscription?: Subscription;
+
+  protected guestNavLinks: Array<NavLink> = [
+    { name: 'login', display: 'Login' },
+    { name: 'signup', display: 'Sign up' },
+    { name: 'edit', display: 'Edit' },
+    { name: 'list', display: 'List' },
+    { name: 'product', display: 'Product' }
+  ];
+  protected userNavLinks: Array<NavLink> = [
+    { name: 'logout', display: 'Logout', onClick: () => {this.auth.logout()} },
+    { name: 'edit', display: 'Edit' },
+    { name: 'list', display: 'List' },
+    { name: 'product', display: 'Product' }
+  ];
 
   constructor(
+    protected auth: AuthService,
     protected router: Router,
     protected navService: NavService
   ) { }
@@ -29,49 +40,56 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.navService.pageGetCurrent().subscribe((events: any) => {
       this.currentPage = events as string;
-    })
+    });
+    this.loggedInSubscription = this.auth.isLoggedIn().subscribe(user => {
+      this.loggedInUser = user;
+    }, error => {
+      console.error(error);
+    });
   }
 
-  getNavRoutes() {
-    let navRoutes: Array<Route> = new Array();
+  ngOnDestroy() {
+    this.loggedInSubscription?.unsubscribe();
+  }
 
-    // Gether Routes
+  getNavLinks() {
+    let navLinkArray: Array<NavLink> = new Array();
+
+    if (this.loggedInUser) {
+      navLinkArray = this.userNavLinks;
+    }
+    else {
+      navLinkArray = this.guestNavLinks;
+    }
+
+    this.prepareNavLinks(navLinkArray);
+    return navLinkArray;
+  }
+
+  prepareNavLinks(navLinkArray: Array<NavLink>) {
+    let routePaths: Array<string> = new Array();
+
     this.router.config.forEach(route => {
       if (route.path || route.path === "") {
-        let link = this.navLinks.get(route.path);
-        if (link) {
-          route.title = link[0] + this.titleSuffix;
-          link[1] = route;
-        }
+        routePaths.push(route.path);
       }
     });
 
-    // Sort Routes
-    this.navLinks.forEach(link => {
-      if (link[1]) {
-        navRoutes.push(link[1]);
+    navLinkArray.forEach(link => {
+      if (link.name == this.currentPage) {
+        link.action = 'current';
       }
-      else switch (link[0]) {
-        case "logout":
-          
-          break;
-      
-        default:
-          break;
+      else if (routePaths.includes(link.name)) {
+        link.action = 'route';
       }
-    });
-
-    return navRoutes;
-  } // TODO: turn into model class file (?) 
-
-  displayNavRouteText(route: Route): string {
-    let displayText: string = "";
-
-    let routeTitle = route.title as string;
-    displayText = routeTitle.replace(this.titleSuffix, "");
-
-    return displayText;
-  } // TODO: turn into model class file (?) 
+      else if (link.onClick) {
+        link.action = 'click';
+      }
+      else {
+        link.action = '';
+      }
+    })
+  }
 
   switch() {
     this.navService.pageSelect(this.currentPage);

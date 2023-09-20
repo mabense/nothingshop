@@ -1,16 +1,23 @@
 <mat-nav-list (click)="closeSidenav()">
-    <ng-container *ngFor="let route of getNavRoutes() | reverse">
-        <!-- ng-container *ngIf="route.path !== '' && route.path !== '**'" -->
-            <ng-container *ngIf="route.path !== currentPage">
-                <a mat-list-item [routerLink]="'/' +  route.path">
-                    <span class="nav-text">{{displayNavRouteText(route)}}</span>
-                </a>
-            </ng-container>
-            <ng-container *ngIf="route.path === currentPage">
+    <ng-container *ngFor="let link of getNavLinks() | reverse">
+        <ng-container [ngSwitch]="link.action">
+            <ng-container *ngSwitchCase="'current'">
                 <a mat-list-item>
-                    <span class="nav-text">{{displayNavRouteText(route)}}</span>
+                    <span class="nav-text">{{link.display}}</span>
                 </a>
             </ng-container>
-        <!-- /ng-container -->
+            <ng-container *ngSwitchCase="'route'">
+                <a mat-list-item [routerLink]="'/' +  link.name">
+                    <span class="nav-text">{{link.display}}</span>
+                </a>
+            </ng-container>
+            <ng-container *ngSwitchCase="'click'">
+                <a mat-list-item *ngIf="link.onClick" (click)="link.onClick()">
+                    <span class="nav-text">{{link.display}}</span>
+                </a>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+            </ng-container>
+        </ng-container>
     </ng-container>
 </mat-nav-list>

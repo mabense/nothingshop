@@ -3,21 +3,31 @@
         <mat-icon>menu</mat-icon>
     </button>
     <div fxFlex fxLayoutAlign="space-between center" fxLayout fxHide.xs>
-        <ng-container *ngFor="let route of getNavRoutes()">
-            <ng-container *ngIf="route.path !== currentPage">
-                <a [routerLink]="'/' +  route.path">
-                    <!--  *ngIf="route.path !== '' && route.path !== '**'" -->
-                    <div fxLayoutAlign="center center">
-                        <span class="nav-text">{{displayNavRouteText(route)}}</span>
-                    </div>
-                </a>
-            </ng-container>
-            <ng-container *ngIf="route.path === currentPage">
-                <a id="primary-toolbar-current">
-                    <div fxLayoutAlign="center center">
-                        <span class="nav-text">{{displayNavRouteText(route)}}</span>
-                    </div>
-                </a>
+        <ng-container *ngFor="let link of getNavLinks()">
+            <ng-container [ngSwitch]="link.action">
+                <ng-container *ngSwitchCase="'current'">
+                    <a id="primary-toolbar-current">
+                        <div fxLayoutAlign="center center">
+                            <span class="nav-text">{{link.display}}</span>
+                        </div>
+                    </a>
+                </ng-container>
+                <ng-container *ngSwitchCase="'route'">
+                    <a [routerLink]="'/' +  link.name">
+                        <div fxLayoutAlign="center center">
+                            <span class="nav-text">{{link.display}}</span>
+                        </div>
+                    </a>
+                </ng-container>
+                <ng-container *ngSwitchCase="'click'">
+                    <a *ngIf="link.onClick" (click)="link.onClick()">
+                        <div fxLayoutAlign="center center">
+                            <span class="nav-text">{{link.display}}</span>
+                        </div>
+                    </a>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                </ng-container>
             </ng-container>
         </ng-container>
     </div>

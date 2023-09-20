@@ -13,29 +13,16 @@ export class AppComponent implements OnInit {
   title = 'nothingshop';
   @ViewChild("sidenav") sidenavRef?: MatSidenav;
 
-  private loggedInUser?: firebase.default.User | null;
-  private loggedInSubscription?: Subscription;
-
   constructor(
-    private auth: AuthService, 
     private navService: NavService
   ) { }
 
   ngOnInit(): void {
     this.navService.pageUpdateAfterNavigationEnd();
-    this.loggedInSubscription = this.auth.isLoggedIn().subscribe(user => {
-      this.loggedInUser = user;
-    }, error => {
-      console.error(error);
-    });
   }
 
   ngAfterViewInit() {
     this.navService.sidenavGetRef(this.sidenavRef);
-  }
-
-  ngOnDestroy() {
-    this.loggedInSubscription?.unsubscribe();
   }
 
 }
