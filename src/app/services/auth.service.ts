@@ -32,8 +32,7 @@ export class AuthService {
       let credProm = this.auth.createUserWithEmailAndPassword(email, pass);
       try {
         await credProm;
-        await this.logout();
-        this.navService.pageSelect('/login');
+        this.navService.pageSelect('/product');
       } catch (error) {
         console.error(error);
       }
